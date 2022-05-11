@@ -1,1 +1,2 @@
 # OrionRPG
+Petit plugin RPG
