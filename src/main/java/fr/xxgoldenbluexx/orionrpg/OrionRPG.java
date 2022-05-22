@@ -2,10 +2,12 @@ package fr.xxgoldenbluexx.orionrpg;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -22,12 +24,15 @@ public class OrionRPG extends JavaPlugin {
 	
 	public static OrionListener listener;
 	
+	public static @NotNull Logger logger;
+	
 	private Map<Player,PlayerWrapperBase> playerMap = new HashMap<>();
 	
 	@Override
 	public void onEnable() {
 		super.onEnable();
 		main = this;
+		logger = getLogger();
 		injector = Guice.createInjector(new OrionRPGiocModule());
 		listener = new OrionListener();
 		Bukkit.getPluginManager().registerEvents(listener, main);

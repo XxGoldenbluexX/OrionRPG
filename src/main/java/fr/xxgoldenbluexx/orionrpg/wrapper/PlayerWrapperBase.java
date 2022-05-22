@@ -1,8 +1,11 @@
 package fr.xxgoldenbluexx.orionrpg.wrapper;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.bukkit.entity.Player;
+
+import com.google.inject.Inject;
 
 import fr.xxgoldenbluexx.orionrpg.annotation.SerializedField;
 import fr.xxgoldenbluexx.orionrpg.serialization.AutoSerializable;
@@ -17,6 +20,11 @@ public class PlayerWrapperBase extends AutoSerializable{
 	
 	public Player player() {
 		return player;
+	}
+	
+	@Inject
+	public PlayerWrapperBase() {
+		super(new HashMap<>());
 	}
 	
 	public PlayerWrapperBase(Map<String,Object> serialMap) {

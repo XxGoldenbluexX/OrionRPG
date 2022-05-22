@@ -1,7 +1,10 @@
 package fr.xxgoldenbluexx.orionrpg.data.yaml;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.UUID;
+
+import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.google.inject.Inject;
 
@@ -11,6 +14,8 @@ import fr.xxgoldenbluexx.orionrpg.wrapper.PlayerWrapperBase;
 
 public class YamlPlayerWrapperRepository implements IPlayerWrapperRepository {
 
+	public static final String WRAPPER_PATH = "wrapper";
+	
 	private final File playerDataFolder;
 	
 	@Inject
@@ -25,14 +30,18 @@ public class YamlPlayerWrapperRepository implements IPlayerWrapperRepository {
 	
 	@Override
 	public PlayerWrapperBase GetFromUUID(UUID uuid) {
-		// TODO Auto-generated method stub
-		return null;
+		File file = new File(playerDataFolder,uuid.toString()+".yml");
+		YamlConfiguration conf = YamlConfiguration.loadConfiguration(file);
+		return (PlayerWrapperBase) conf.get(WRAPPER_PATH);
 	}
 
 	@Override
-	public PlayerWrapperBase StoreToUUID(UUID uuid, PlayerWrapperBase wrapper) {
-		// TODO Auto-generated method stub
-		return null;
+	public void StoreToUUID(UUID uuid, PlayerWrapperBase wrapper) throws IOException {
+		File file = new File(playerDataFolder,uuid.toString()+".yml");
+		file.createNewFile(); //DO nothing if file already created.
+		YamlConfiguration conf = new YamlConfiguration();
+		conf.set(WRAPPER_PATH, wrapper);
+		conf.save(file);
 	}
 
 }

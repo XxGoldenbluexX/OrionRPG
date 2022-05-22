@@ -1,5 +1,6 @@
 package fr.xxgoldenbluexx.orionrpg.data;
 
+import java.io.IOException;
 import java.util.UUID;
 
 import fr.xxgoldenbluexx.orionrpg.wrapper.PlayerWrapperBase;
@@ -7,8 +8,8 @@ import fr.xxgoldenbluexx.orionrpg.wrapper.PlayerWrapperBase;
 public interface IPlayerWrapperRepository {
 
 	
-	public PlayerWrapperBase GetFromUUID(UUID uuid);
+	public PlayerWrapperBase GetFromUUID(UUID uuid) throws IOException;
 	
-	public PlayerWrapperBase StoreToUUID(UUID uuid, PlayerWrapperBase wrapper);
+	public void StoreToUUID(UUID uuid, PlayerWrapperBase wrapper) throws IOException;
 	
 }
